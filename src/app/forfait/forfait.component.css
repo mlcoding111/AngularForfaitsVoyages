@@ -1,0 +1,13 @@
+.prix-hotel{
+    display: flex;
+}
+
+.mini-forfait-wrapper{
+    width: 15rem;
+    opacity: 0.9;
+}
+
+
+.mini-forfait-wrapper:hover{
+    opacity: 1;
+}

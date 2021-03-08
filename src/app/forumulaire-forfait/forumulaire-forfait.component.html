@@ -1,0 +1,263 @@
+<form
+  class="formulaire-form"
+  (ngSubmit)="onSubmit()"
+  (click)="setFilteredProperty()"
+>
+  <h1>Filtre de recherche</h1>
+  <button mat-button color="primary" (click)="changeTheme($event)">Mexique</button>
+  <button mat-button color="primary" (click)="changeTheme($event)">Japon</button>|
+  <button mat-button color="Link" (click)="resetClick($event)">
+    Reset form
+  </button>
+  <hr />
+  <h2>Information</h2>
+  <!-- Destination -->
+  <mat-form-field class="formulaire-full-width">
+    <mat-label>Destination</mat-label>
+    <input
+      required
+      matInput
+      placeholder="Ex: Mexique"
+      minlength="3"
+      maxlength="20"
+      [matAutocomplete]="auto"
+      [(ngModel)]="forfaitsFilter.destination"
+      name="controleDestination"
+      #controleDestination="ngModel"
+    />
+    <mat-error *ngIf="controleDestination.hasError('required')">
+      La destination est <strong>obligatoire</strong>
+    </mat-error>
+    <mat-error *ngIf="controleDestination.hasError('minlength')">
+      La longueur minimale de la description est de 20 caractères.
+    </mat-error>
+
+    <!-- <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let forfait of forfaits | removeDuplicate" [value]="forfait.destination">
+              {{forfait.destination}}
+            </mat-option>
+          </mat-autocomplete> -->
+
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option
+        *ngFor="let property of fileredProperty.destination"
+        [value]="property"
+      >
+        {{ property }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <!-- Ville de départ -->
+  <mat-form-field class="formulaire-full-width">
+    <mat-label>Ville de départ</mat-label>
+    <input
+      required
+      matInput
+      placeholder="Ex: Montréal"
+      maxlength="20"
+      minLength="2"
+      [matAutocomplete]="autoVille"
+      [(ngModel)]="forfaitsFilter.villeDepart"
+      name="controleVille"
+      #controleVille="ngModel"
+    />
+    <mat-error *ngIf="controleVille.hasError('required')">
+      La ville de départ est <strong>obligatoire</strong>
+    </mat-error>
+    <mat-error *ngIf="controleVille.hasError('minlength')">
+      La longueur minimale de la description est de 2 caractères.
+    </mat-error>
+    <mat-autocomplete #autoVille="matAutocomplete">
+      <mat-option
+        *ngFor="let property of fileredProperty.villeDepart"
+        [value]="property"
+      >
+        {{ property }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <!-- Hotel -->
+  <h2>Hotel</h2>
+  <mat-form-field class="formulaire-full-width">
+    <mat-label>Nom de l'hotel</mat-label>
+    <input
+      required
+      minlength="2"
+      matInput
+      placeholder="Ex: Playa coco"
+      maxlength="20"
+      type="text"
+      [matAutocomplete]="autoHotel"
+      [(ngModel)]="forfaitsFilter.hotel.nom"
+      name="controleHotel"
+      #controleHotel="ngModel"
+    />
+    <mat-error *ngIf="controleHotel.hasError('required')">
+      Le nom de l'hotel est <strong>obligatoire</strong>
+    </mat-error>
+    <mat-error *ngIf="controleHotel.hasError('minlength')">
+      La longueur minimale de l'hotel est de 2 caractères.
+    </mat-error>
+    <mat-autocomplete #autoHotel="matAutocomplete">
+      <mat-option
+        *ngFor="let property of fileredProperty.hotelNom"
+        [value]="property"
+      >
+        {{ property }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <!-- Coordonnées -->
+
+  <mat-form-field class="formulaire-full-width">
+    <mat-label>Coordonnées</mat-label>
+    <input
+      required
+      matInput
+      placeholder="Ex: Smith"
+      minlength="2"
+      [(ngModel)]="forfaitsFilter.hotel.coordonnees"
+      name="controleAdresse"
+      #controleAdresse="ngModel"
+    />
+    <mat-error *ngIf="controleAdresse.hasError('required')">
+      Les coordonnées sont <strong>obligatoire</strong>
+    </mat-error>
+    <mat-error *ngIf="controleAdresse.hasError('minlength')">
+      La longueur minimale des coordonnées est de 2 caractères.
+    </mat-error>
+  </mat-form-field>
+
+  <!-- Étoiles -->
+  <div>
+    <h5>Nombre d'étoiles</h5>
+    <mat-icon
+      svgIcon="thumbs-up"
+      aria-hidden="false"
+      aria-label="Example thumbs up SVG icon"
+    ></mat-icon>
+    <mat-slider
+      min="1"
+      max="5"
+      value="{{ nombreEtoiles }}"
+      step="1"
+      thumbLabel
+      [(ngModel)]="forfaitsFilter.hotel.nombreEtoiles"
+      (input)="changeStarValue($event)"
+      name="etoileSlider"
+    ></mat-slider>
+    {{ forfaitsFilter.hotel.nombreEtoiles }}
+  </div>
+
+  <!-- Chambres -->
+  <mat-form-field class="formulaire-full-width">
+    <mat-label>Nombres de chambres</mat-label>
+    <input
+      required
+      matInput
+      placeholder="Ex: 2"
+      type="number"
+      min="2"
+      max="3"
+      [(ngModel)]="forfaitsFilter.hotel.nombreChambres"
+      name="controleChambres"
+      #controleChambres="ngModel"
+    />
+    <mat-error *ngIf="controleChambres.hasError('required')">
+      Le nombre de chambres est <strong>obligatoire</strong>
+    </mat-error>
+    <mat-error *ngIf="controleChambres.hasError('minlength')">
+      La longueur minimale des l'hotel coordonnées est de 2 caractères.
+    </mat-error>
+  </mat-form-field>
+
+  <!-- Caractéristiques -->
+  <div>
+    <h5>Caractéristiques</h5>
+    <span class="subtile">*ne sera pas pris en compte lors du filtrage*</span>
+    <section class="cractéristiques-section">
+      <ul>
+        <li>
+          <mat-checkbox class="formulaire-margin">Face a la plage</mat-checkbox>
+        </li>
+        <li>
+          <mat-checkbox class="formulaire-margin">Déjeuner offert</mat-checkbox>
+        </li>
+        <li>
+          <mat-checkbox class="formulaire-margin">Salle de sport</mat-checkbox>
+        </li>
+        <li>
+          <mat-checkbox class="formulaire-margin">Minigolf</mat-checkbox>
+        </li>
+        <li>
+          <mat-checkbox class="formulaire-margin">Ascenseur</mat-checkbox>
+        </li>
+        <li>
+          <mat-checkbox class="formulaire-margin">Mariages</mat-checkbox>
+        </li>
+      </ul>
+    </section>
+  </div>
+
+  <!-- Dates -->
+  <div>
+    <span class="subtile">*Les dates sont décalés de 1 jours avec la valeur..*</span>
+    <h5>Date de départ</h5>
+    <mat-form-field appearance="fill">
+      <mat-label>Choisir une date</mat-label>
+      <input
+        required
+        matInput
+        [matDatepicker]="picker"
+        [(ngModel)]="forfaitsFilter.dateDepart"
+        name="controleDates"
+        #controleDates="ngModel"
+        (ngModelChange)="convertDateDepart($event)"
+      />
+      <mat-error *ngIf="controleDates.hasError('required')">
+        La date de départ est <strong>obligatoire</strong>
+      </mat-error>
+
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <h5>Date de retour</h5>
+    <mat-form-field appearance="fill">
+      <mat-label>Choisir une date</mat-label>
+      <input
+        required
+        matInput
+        [matDatepicker]="picker2"
+        [(ngModel)]="forfaitsFilter.dateRetour"
+        name="controleDates2"
+        #controleDates2="ngModel"
+        (ngModelChange)="convertDateRetour($event)"
+      />
+      <mat-error *ngIf="controleDates2.hasError('required')">
+        La date de retour est <strong>obligatoire</strong>
+      </mat-error>
+
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+
+    <div>
+      <h5>Nombre de jours</h5>
+      <span class="subtile">*ne sera pas pris en compte lors du filtrage*</span>
+      <section class="formulaire-section">
+        <mat-checkbox class="formulaire-margin">7</mat-checkbox>
+        <mat-checkbox class="formulaire-margin">10</mat-checkbox>
+        <mat-checkbox class="formulaire-margin">14</mat-checkbox>
+      </section>
+    </div>
+  </div>
+
+  <button mat-button color="Link" type="submit">Soumettre</button>
+
+
+  <hr />
+</form>

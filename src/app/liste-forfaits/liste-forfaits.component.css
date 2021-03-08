@@ -1,0 +1,35 @@
+
+.content, .content-complet {
+    padding: 16px;
+}
+
+
+.content{
+    background:  linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)), url("https://wallpapermemory.com/uploads/430/traveling-wallpaper-hd-1920x1080-488801.jpg");
+    background-position: center;
+    background-size: cover;
+    min-height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.big-wrapper{
+    max-width: 100 !important;
+}
+
+.content-complet{
+    width: 75%;
+    margin-left: 15%;
+    display: flex;
+    justify-content: center;
+}
+
+#nav-title{
+    margin-left: 3.3rem;
+}
+
+hr{
+    margin: 5rem;
+}

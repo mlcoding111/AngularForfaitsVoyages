@@ -1,0 +1,7 @@
+.etoile-liste{
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    margin-left: 0rem !important;
+    padding-left: 0rem !important;
+}

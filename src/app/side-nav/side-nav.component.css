@@ -1,0 +1,58 @@
+/* .example-container {
+    width: 100%;
+    height: 300px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+}
+  
+.example-sidenav-content {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+  
+.example-sidenav {
+    padding: 20px;
+  } */
+
+
+mat-sidenav-container{    
+    min-height: 100vh;
+}
+
+
+app-forumulaire-forfait{
+    display: flex;
+    justify-content: center;
+}
+
+@media only screen and (max-width: 1000px) { 
+    body{
+        color: red !important;
+    }
+}
+
+mat-sidenav{
+    width: 40%;
+    border: 3px solid rgb(0, 71, 138);
+    opacity: .95;
+    transition: opacity 0.2s ease-in;
+}
+
+mat-sidenav:hover{
+    opacity: 1;
+}
+
+#toggle-button{
+    position: fixed;
+    top: 50%;
+    opacity: .4;
+    width: 10px;
+    margin-left: .2rem;
+    z-index: 999;
+    background: black;
+}
+
+#toggle-button:hover{
+    opacity: 1;
+}

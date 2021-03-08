@@ -1,0 +1,21 @@
+.gestion-wrapper{
+    text-align: center;
+}
+
+#navbar{
+    display: flex;
+    flex: 1;
+}
+
+
+.menu{
+    margin-left: 1rem;
+}
+
+.menu a{
+    padding: 2rem;
+    text-decoration: none;
+}
+.menu button{
+    margin: 0 .5rem;
+}

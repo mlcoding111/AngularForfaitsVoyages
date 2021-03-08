@@ -1,0 +1,67 @@
+   
+    <mat-card class="example-card mat-elevation-z4 fixCard" [ngClass]="{'bordure-rouge': forfait.vedette}">
+        <mat-card-header>          
+            <!-- <div mat-card-avatar class="example-header-image"></div> -->
+
+            <span *ngIf="forfait.vedette" id="rabais">
+                <h3>*VEDETTE*</h3>
+            </span>
+            <mat-card-title>{{forfait.destination}}</mat-card-title>
+            <mat-card-subtitle> de {{forfait.villeDepart}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src={{forfait.srcImage}} width="25%" alt="Photo of a Shiba Inu">
+        <mat-card-content>
+                <!-- Left content -->
+            <div class="left-content">              
+                <div class="prix-hotel">
+                    <h4>{{forfait.hotel.nom}}</h4>
+                    <div *ngIf="forfait.rabais > 0; then thenBlock else elseBlock"></div>
+                    <ng-template #thenBlock>
+                        <div class="flex-container">
+                            <h2 class="text-barrer">{{forfait.prix}}$</h2>
+                            <h5>- {{forfait.rabais}}$</h5>
+                            <h1>{{forfait.prix - forfait.rabais}}$</h1>
+                        </div>
+                    </ng-template>
+                    <ng-template #elseBlock>
+                        <div>
+                            <h2>{{forfait.prix}}$</h2>
+                        </div>
+                    </ng-template>
+                </div>
+                    <!-- Afficher les étoiles -->
+                <app-etoiles [forfait]="forfait"></app-etoiles>
+            </div>    
+                <!-- Right content -->
+            <div class="right-content">
+                <ul *ngFor="let item of [].constructor(forfait.hotel); let i = index">
+                    <li>
+                        <b>Adresse :</b> {{item.coordonnees}}
+                    </li>
+                    <li>
+                        <b>Chambres :</b> {{item.nombreChambres}}
+                    </li>
+                    <li>
+                        <b>Caracteristique :</b> 
+                        <ul *ngFor="let car of item.caracteristiques">
+                            <li>{{car}} </li>
+                        </ul>
+                    </li>
+                </ul>
+              
+                <div class="dates">
+                    <div>
+                        <b>Du :</b> {{forfait.dateRetour}}
+                    </div>
+                    <div>
+                        <b>Au :</b> {{forfait.dateDepart}}                
+                    </div>
+                    
+                </div>
+            </div>
+
+
+        </mat-card-content>
+    </mat-card>
+
+

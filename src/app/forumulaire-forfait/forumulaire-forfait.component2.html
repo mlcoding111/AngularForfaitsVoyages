@@ -1,0 +1,46 @@
+<form class="formulaire-form" [formGroup]="myForm" (ngSubmit)="onSubmit()">
+  Value : {{myForm.value | json}} {{forfaits.destination}}
+  <hr />
+  <h1>Filtre de recherche</h1>
+  <hr />
+  <h2>Information</h2>
+
+  <div *ngFor="let item of formItems; let i = index">
+    <mat-form-field class="formulaire-full-width">
+      <input
+        matInput
+        placeholder="{{item}}"
+        id="{{item}}"
+        formControlName="{{item}}"
+        [matAutocomplete]="auto"
+      />
+    </mat-form-field>
+    <mat-error
+      *ngIf="myForm.get(item).errors && 
+    myForm.get(item).hasError('minlength')"
+    >
+      La longueur minimale est de 2 caractères.
+    </mat-error>
+    <mat-error
+      *ngIf="myForm.get(item).errors && 
+    myForm.get(item).hasError('required')"
+    >
+      Ce champ est <strong>obligatoire *</strong>
+    </mat-error>
+  </div>
+
+  <button (click)="getIt()">Click me</button>
+
+  <!-- <mat-form-field class="formulaire-full-width">
+    <input matInput placeholder="Destination" id="destination" formControlName="destination" [matAutocomplete]="auto">
+  </mat-form-field>
+ -->
+
+  <!-- Déclare les erreurs globale avec un ngFor pour éviter de copier du codes -->
+
+  <mat-autocomplete #auto="matAutocomplete">
+    <mat-option *ngFor="let forfait of forfaits" [value]="forfait.destination">
+      {{forfait.destination}}
+    </mat-option>
+  </mat-autocomplete>
+</form>

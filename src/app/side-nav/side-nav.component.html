@@ -1,0 +1,45 @@
+<mat-sidenav-container>
+  <mat-sidenav
+    #sidenav
+    mode="over"
+    [(opened)]="opened"
+    class="side-nav-wrapper"
+  >
+    <div fxLayout="row wrap" fxLayoutGap="16px grid">
+      <div fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="100%">
+        <!-- Formulaire dans la sidenav -->
+        <!-- <button (click)="test()">Test le nouveaux filter</button> -->
+        <app-forumulaire-forfait
+          [nombreEtoiles]="nombreEtoiles"
+          [forfaits]="forfaits"
+          (greetEvent)="greet($event)"
+          [forfaitsFilter]="forfaitsFilter"
+          (filteredForfaits)="receivedFilteredForfaits($event)"
+          [newForfaits]="newForfaits"
+        ></app-forumulaire-forfait>
+      </div>
+    </div>
+  </mat-sidenav>
+
+  <!-- IL FAUT ENVOYER LE "forfaits" DE SIDE NAV A APP-LISTE-FORFAITS POUR CHANGER LA SOURCE DES FORFAITS -->
+
+  <!-- Contenu de la sidenav -->
+  <mat-sidenav-content>
+    <button
+      mat-button
+      color="accent"
+      (click)="sidenav.toggle()"
+      id="toggle-button"
+    >
+      <h1>></h1>
+    </button>
+    <app-liste-forfaits
+      [nombreEtoiles]="nombreEtoiles"
+      [forfaitsFilter]="forfaitsFilter"
+      [forfaits]="forfaits"
+      [filteredForfaits]="filteredForfaits"
+      [newForfaits]="newForfaits"
+    ></app-liste-forfaits>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+

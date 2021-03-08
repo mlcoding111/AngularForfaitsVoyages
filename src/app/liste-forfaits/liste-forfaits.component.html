@@ -1,0 +1,39 @@
+<div>
+  <!-- Liste des forfaits mini -->
+  <div class="content">
+    <div fxLayout="row wrap" fxLayoutGap="16px grid">
+      <ng-container
+        fxFlex="100%"
+        fxFlex.xs="100%"
+        fxFlex.sm="100%"
+        *ngFor="let forfait of newForfaits | isVedette"
+      >
+        <app-forfait [forfait]="forfait"></app-forfait>
+      </ng-container>
+    </div>
+  </div>
+
+  <hr />
+  <!-- Liste des forfaits complets -->
+  <div class="content-complet">
+    <!-- Button debug -->
+    <!-- <button type="button" (click)="test()">Get all</button> -->
+    <div fxLayout="row wrap" fxLayoutGap="16px grid">
+      <div *ngIf="newForfaits.length === 0">
+        <h1>Désolé, aucun forfait ne correspond a votre recherche</h1>
+      </div>
+      <div
+        fxFlex="50%"
+        fxFlex.xs="100%"
+        fxFlex.sm="100%"
+        *ngFor="let forfait of newForfaits"
+        class="big-wrapper"
+      >
+        <app-forfait-complet
+          [forfait]="forfait"
+          [forfaitsFilter]="forfaitsFilter"
+        ></app-forfait-complet>
+      </div>
+    </div>
+  </div>
+</div>
